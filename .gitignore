@@ -2,3 +2,5 @@ data/
 test.m
 test.py
 *.asv
+.ipynb_checkpoints/
+__pycache__/
