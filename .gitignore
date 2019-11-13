@@ -4,3 +4,4 @@ test.py
 *.asv
 .ipynb_checkpoints/
 __pycache__/
+corrupted_data/

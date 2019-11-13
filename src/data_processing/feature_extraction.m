@@ -1,16 +1,3 @@
-%% Set parameters for first step preprocessing
-list = dir('data\NF*');
-
-for i = 1:length(list)
-dataset = fullfile(list(i).folder, list(i).name, join([list(i).name, '.vhdr']));
-
-[freq_pos_beta_gamma, freq_neg_beta_gamma] = feature_extraction(dataset);
-
-save(fullfile(list(i).folder, list(i).name, join([list(i).name, '_pos_beta_gamma.mat'])), 'freq_pos_beta_gamma');
-save(fullfile(list(i).folder, list(i).name, join([list(i).name, '_neg_beta_gamma.mat'])), 'freq_neg_beta_gamma');
-
-end
-
 function [freq_pos_beta_gamma, freq_neg_beta_gamma] = feature_extraction(dataset)
 
 prestim    = 0;
@@ -48,5 +35,3 @@ freq_neg_gamma = sum(sum(freq_neg.powspctrm(:, :, find(freq_neg.freq>=32), :), 4
 freq_neg_beta_gamma = [freq_neg_beta freq_neg_gamma];
 
 end
-
-
