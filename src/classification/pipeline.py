@@ -42,6 +42,15 @@ def general_preprocessing(X, y):
     X_test = scaler.transform(X_test)
     return X_train, X_test, y_train, y_test
 
+def cv_run(X, y, kf, clf):
+    cv_scores = []
+    for train_index, test_index in kf.split(X):
+        X_train, X_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+        clf.fit(X_train, y_train)
+        cv_scores.append(clf.score(X_test, y_test))
+    return cv_scores
+
 def cross_validation(X, y, cv=5, bootstrap_shuffle=None):
     '''
     Run cross validation of different models with default parameters:
@@ -66,6 +75,7 @@ def cross_validation(X, y, cv=5, bootstrap_shuffle=None):
     X, y = shuffle(X, y, random_state=0)
 
     if bootstrap_shuffle:
+        # Run bootstraping by random shuffling
         clf_scores = {}
         for clf in clfs:
             bootstrap_scores = []
@@ -73,27 +83,14 @@ def cross_validation(X, y, cv=5, bootstrap_shuffle=None):
             for i in tqdm(range(bootstrap_shuffle)):
                 np.random.shuffle(y)
                 kf = KFold(n_splits=cv)
-                cv_scores = []
-                for train_index, test_index in kf.split(X):
-                    X_train, X_test = X[train_index], X[test_index]
-                    y_train, y_test = y[train_index], y[test_index]
-                    this_clf = clfs[clf]
-                    this_clf.fit(X_train, y_train)
-                    cv_scores.append(this_clf.score(X_test, y_test))
-                this_score = np.mean(cv_scores)
+                this_score = np.mean(cv_run(X, y, kf, clfs[clf]))
                 bootstrap_scores.append(this_score)
             clf_scores[clf]= (np.mean(bootstrap_scores), np.std(bootstrap_scores), bootstrap_scores)
-        return clf_scores
     else:
+        # Run classification
         clf_scores = {};
         for clf in clfs:
             kf = KFold(n_splits=cv)
-            cv_scores = []
-            for train_index, test_index in kf.split(X):
-                X_train, X_test = X[train_index], X[test_index]
-                y_train, y_test = y[train_index], y[test_index]
-                this_clf = clfs[clf]
-                this_clf.fit(X_train, y_train)
-                cv_scores.append(this_clf.score(X_test, y_test))
+            cv_scores = cv_run(X, y, kf, clfs[clf])
             clf_scores[clf] = (np.mean(cv_scores), np.std(cv_scores), cv_scores)
-        return clf_scores
+    return clf_scores
