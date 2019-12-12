@@ -46,6 +46,7 @@ temp_neg = temp_neg + freq_neg.powspctrm;
 
 end
 
+% Take the average of the freqs
 freq_pos.powspctrm = temp_pos./length(list);
 freq_neg.powspctrm = temp_neg./length(list);
 
@@ -58,26 +59,50 @@ cfg.channel  = {'FT7'};
 figure;
 subplot(2,6,1);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'FT8'};
 subplot(2,6,2);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'T7'};
 subplot(2,6,3);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'T8'};
 subplot(2,6,4);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'TP7'};
 subplot(2,6,5);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'TP8'};
 subplot(2,6,6);
 ft_singleplotTFR(cfg, freq_pos);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg          = [];
 cfg.colorbar = 'yes';
@@ -88,23 +113,47 @@ cfg.channel  = {'FT7'};
 
 subplot(2,6,7);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'FT8'};
 subplot(2,6,8);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'T7'};
 subplot(2,6,9);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'T8'};
 subplot(2,6,10);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'TP7'};
 subplot(2,6,11);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
 
 cfg.channel  = {'TP8'};
 subplot(2,6,12);
 ft_singleplotTFR(cfg, freq_neg);
+yline(12.5, 'r');
+yline(30, 'r');
+yline(32, 'b');
+yline(59, 'b');
