@@ -48,5 +48,3 @@ freq_neg_gamma = sum(sum(freq_neg.powspctrm(:, :, find(freq_neg.freq>=32), :), 4
 freq_neg_beta_gamma = [freq_neg_beta freq_neg_gamma];
 
 end
-
-
